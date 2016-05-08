@@ -5,9 +5,9 @@
 Transform::Transform()
 {
 	mParent = nullptr;
-	mPreviousPosition = XMFLOAT3();
-	mPosition = XMFLOAT3();
-	mRotation = XMFLOAT3();
+	mPreviousPosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	mPosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	mRotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	mScale = XMFLOAT3(1.0f, 1.0f, 1.0f);
 }
 Transform::~Transform()
@@ -18,10 +18,10 @@ void Transform::Update(float t)
 {
 	// Calculate world matrix
 	XMMATRIX scale = XMMatrixScaling(mScale.x, mScale.y, mScale.z);
-	XMMATRIX rotation = XMMatrixRotationX(mRotation.x) * XMMatrixRotationY(mRotation.y) * XMMatrixRotationZ(mRotation.z);
+	XMMATRIX rotation = XMMatrixRotationQuaternion(XMQuaternionRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z));
 	XMMATRIX translation = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z);
 
-	XMStoreFloat4x4(&mWorld, scale * rotation * translation);
+	XMStoreFloat4x4(&mWorld,  scale * rotation * translation);
 
 	if (mParent != nullptr)
 	{

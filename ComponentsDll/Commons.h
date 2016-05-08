@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <d3d11_1.h>
 #include <DirectXCollision.h>
+#include <DirectXMath.h>
 
 using namespace std;
 using namespace DirectX;

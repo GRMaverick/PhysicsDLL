@@ -45,6 +45,6 @@ private:
 
 	XMFLOAT4X4			mWorld;
 
-	Transform *					mParent;
+	Transform *				mParent;
 };
 
